@@ -2,6 +2,7 @@ from qiskit import QuantumCircuit
 from qft.qft import custom_qft, inverse_custom_qft
 import numpy as np
 
+# Function to create a quantum adder (Draper Adder)
 def quantum_adder(a: int, b: int, n: int) -> QuantumCircuit:
   
     """
@@ -26,7 +27,9 @@ def quantum_adder(a: int, b: int, n: int) -> QuantumCircuit:
     for i in range(n):
         for j in range(i, n):
             if (b >> (j - i)) & 1:
-                qc.cp(np.pi / (2 ** (j - i)), i, j)
+                # Ensure i and j are not the same to avoid duplicate qubit arguments
+                if i != j:
+                    qc.cp(np.pi / (2 ** (j - i)), i, j)
 
     # Apply inverse QFT
     qc.append(inverse_custom_qft(n), range(n))
