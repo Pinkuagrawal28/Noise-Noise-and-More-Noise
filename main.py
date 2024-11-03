@@ -1,6 +1,7 @@
 # main.py
 
-from qiskit import QuantumCircuit, Aer, execute
+from qiskit import QuantumCircuit, execute, transpile
+from qiskit_aer import Aer
 from visual_analysis.visual import plot_circuit, plot_results, plot_statevector  # Import the visualization functions
 from draper_adder.drapper_adder import quantum_adder  # Import the Draper adder function
 from noise_model.noise import add_pauli_noise  # Import the noise function
@@ -14,12 +15,13 @@ def analyze_quantum_addition_with_noise(a, b, noise_levels):
     """
     results = {}
     n = max(a.bit_length(), b.bit_length()) + 1  # Number of qubits needed
-    print(f"Quantum Adder")
-    print(quantum_adder(a,b,n).draw())
-    print(f"Quantum Adder After basis tranform")
-    print("\n")
-    print(transform_to_basis(quantum_adder(a,b,n)).draw())
-    print("\n")
+    print("Quantum Adder Circuit:")
+    qc = quantum_adder(a, b, n)
+    print(qc.draw())
+
+    print("Quantum Adder Circuit After Basis Transformation:")
+    transformed_qc = transform_to_basis(qc)
+    print(transformed_qc.draw())
     
     for p1, p2 in noise_levels:
         # Create the quantum adder circuit
