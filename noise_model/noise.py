@@ -2,6 +2,7 @@ import numpy as np
 from qiskit import QuantumCircuit
 from qiskit.circuit import Gate
 
+# Function to add noise in the circuit via Pauli gates
 def add_pauli_noise(qc: QuantumCircuit, p_single: float, p_double: float) -> QuantumCircuit:
     """
     Add Pauli noise to a quantum circuit.
@@ -12,17 +13,20 @@ def add_pauli_noise(qc: QuantumCircuit, p_single: float, p_double: float) -> Qua
     :return: Quantum Circuit with added noise
     """
     
-    noisy_qc = QuantumCircuit(qc.num_qubits)
-    for instr, qargs, cargs in qc.data:
+    noisy_qc = QuantumCircuit(*qc.qregs)  # Create a new circuit with the same qubit registers
+    for instr in qc.data:
+        operation = instr.operation  # Get the operation
+        qargs = instr.qubits          # Get the qubits
+
         # Add the original gate to the new circuit
-        noisy_qc.append(instr, qargs, cargs)
+        noisy_qc.append(operation, qargs)
 
         # Check if the gate is single or two-qubit and add noise accordingly
         if len(qargs) == 1 and np.random.rand() < p_single:
-            noisy_qc = add_random_pauli(noisy_qc, qargs[0].index)
+            noisy_qc = add_random_pauli(noisy_qc, noisy_qc.qubits.index(qargs[0]))
         elif len(qargs) == 2 and np.random.rand() < p_double:
-            noisy_qc = add_random_pauli(noisy_qc, qargs[0].index)
-            noisy_qc = add_random_pauli(noisy_qc, qargs[1].index)
+            noisy_qc = add_random_pauli(noisy_qc, noisy_qc.qubits.index(qargs[0]))
+            noisy_qc = add_random_pauli(noisy_qc, noisy_qc.qubits.index(qargs[1]))
     
     return noisy_qc
 
