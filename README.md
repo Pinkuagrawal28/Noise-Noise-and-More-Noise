@@ -5,20 +5,23 @@ Q.) One of the main challenges in quantum computing is the noise in current devi
 This project simulates and analyzes a quantum addition circuit using the Draper adder, transformed to basis gates and subjected to varying noise levels. The circuit utilizes Quantum Fourier Transform (QFT) for addition, and we investigate its performance under different noise conditions, visualizing the error rates and state vectors.
 
 Project Structure : 
+
 ```
 .
-├── main.py                     # Main script to run the quantum addition analysis with noise
+├── basic_gates/
+│   └── transform_to_basis.py
 ├── draper_adder/
-│   └── drapper_adder.py         # Module implementing the Draper quantum adder circuit
-├── gate_basis/
-│   └── transform_to_basis.py    # Module to transform a quantum circuit to basis gates
+│   └── draper_adder.py
 ├── noise_model/
-│   └── noise.py                 # Module to add Pauli noise to the circuit
+│   └── noise.py
 ├── qft/
-│   └── qft.py                   # Module for QFT and inverse QFT
+│   └── qft.py
+├── results
 ├── visual_analysis/
-│   └── visual.py                # Module for visualizing circuits, state vectors, and results
-└── README.md                    # Project documentation
+│   └── visual.py
+├── README.md
+├── main.py
+└── quantum_noise_analysis.ipynb
 ```
 ### Requirements : 
 
@@ -89,3 +92,24 @@ noise_levels = [(0.01, 0.01), (0.05, 0.01), (0.1, 0.01), ...]  # Noise probabili
 3. Making a Web Application via Django for simplify Usage
 
 ## Results and Conclusion
+The quantum addition circuit, implemented using the Draper adder, was transformed into a specific gate basis suitable for execution on quantum hardware. Once transformed, noise was systematically introduced to simulate realistic operational conditions.
+
+```
+Results for noise levels p1=0.01, p2=0.01:
+Outcome 0011: 810 times
+Outcome 1101: 8 times
+Outcome 0010: 27 times
+Outcome 1011: 19 times
+Outcome 0001: 11 times
+Outcome 1111: 7 times
+Outcome 0111: 15 times
+Outcome 0000: 29 times
+Outcome 0100: 8 times
+Outcome 0110: 21 times
+Outcome 0101: 17 times
+Outcome 1001: 14 times
+Outcome 1100: 2 times
+Outcome 1110: 1 times
+Outcome 1000: 11 times
+```
+![quantum_addition_error_heatmap](https://github.com/user-attachments/assets/508fe87e-e82b-4685-8c83-a6500023599a)
