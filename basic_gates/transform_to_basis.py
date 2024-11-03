@@ -1,4 +1,5 @@
 import numpy as np
+from qiskit import QuantumCircuit
 from qiskit.circuit.library import RZGate, SXGate, XGate, CXGate
 
 def transform_to_basis(qc: QuantumCircuit) -> QuantumCircuit:
