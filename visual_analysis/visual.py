@@ -1,10 +1,13 @@
 # visual.py
 
+import numpy as np
 from qiskit import QuantumCircuit
 from qiskit.visualization import plot_histogram, plot_bloch_multivector
-from qiskit import Aer, execute
+from qiskit import execute
+from qiskit_aer import Aer
 import matplotlib.pyplot as plt
 from IPython.display import display
+from qiskit.visualization import plot_state_qsphere
 
 # Function to plot the circuit
 def plot_circuit(qc, title="Quantum Circuit"):
