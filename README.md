@@ -2,6 +2,8 @@
 
 Q.) One of the main challenges in quantum computing is the noise in current devices. In this task, you will create a simple noise generator and assess its effect. You can use any framework you like (Qiskit, Cirq, etc..)
 
+> Note : To View the report and graphs, Use the Result Directory
+
 This project simulates and analyzes a quantum addition circuit using the Draper adder, transformed to basis gates and subjected to varying noise levels. The circuit utilizes Quantum Fourier Transform (QFT) for addition, and we investigate its performance under different noise conditions, visualizing the error rates and state vectors.
 
 Project Structure : 
